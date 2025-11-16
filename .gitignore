@@ -38,3 +38,4 @@ bloomy-*.tar
 
 # Ignore log files
 *.log
+*.bloom
