@@ -86,5 +86,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Storage: Nx tensors (`:u8` for bits, `:u8/:u16/:u32` for counters)
 - Optimal parameter calculation using bloom filter mathematics
 
-[Unreleased]: https://github.com/YOUR_USERNAME/bloomy/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/YOUR_USERNAME/bloomy/releases/tag/v0.1.0
+[Unreleased]: https://github.com/nyo16/bloomy/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/nyo16/bloomy/releases/tag/v0.1.0

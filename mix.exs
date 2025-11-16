@@ -2,7 +2,7 @@ defmodule Bloomy.MixProject do
   use Mix.Project
 
   @version "0.1.0"
-  @source_url "https://github.com/YOUR_USERNAME/bloomy"
+  @source_url "https://github.com/nyo16/bloomy"
 
   def project do
     [
@@ -51,7 +51,7 @@ defmodule Bloomy.MixProject do
         "GitHub" => @source_url,
         "Changelog" => "#{@source_url}/blob/master/CHANGELOG.md"
       },
-      maintainers: ["Your Name"]
+      maintainers: ["nyo16"]
     ]
   end
 
