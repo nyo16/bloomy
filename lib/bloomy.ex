@@ -324,7 +324,9 @@ defmodule Bloomy do
       iex> }
       iex> filter = Bloomy.train(filter, training_data)
   """
-  def train(%Learned{} = filter, training_data, opts \\ []) do
+  def train(filter, training_data, opts \\ [])
+
+  def train(%Learned{} = filter, training_data, opts) do
     Learned.train(filter, training_data, opts)
   end
 

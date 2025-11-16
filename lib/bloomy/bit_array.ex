@@ -86,6 +86,8 @@ defmodule Bloomy.BitArray do
   """
   def set(%__MODULE__{bits: bits, size: size, backend: backend} = bit_array, indices) do
     indices_tensor = normalize_indices(indices, size)
+    # Ensure indices are on the same backend as bits
+    indices_tensor = Nx.backend_transfer(indices_tensor, backend)
 
     # Use put_slice for efficient batch updates
     new_bits = set_bits_at_indices(bits, indices_tensor)
@@ -121,8 +123,10 @@ defmodule Bloomy.BitArray do
     value == 1
   end
 
-  def get(%__MODULE__{bits: bits, size: size}, indices) when is_list(indices) do
+  def get(%__MODULE__{bits: bits, size: size, backend: backend}, indices) when is_list(indices) do
     indices_tensor = normalize_indices(indices, size)
+    # Ensure indices are on the same backend as bits
+    indices_tensor = Nx.backend_transfer(indices_tensor, backend)
     values = get_bits_at_indices(bits, indices_tensor)
 
     values
@@ -130,7 +134,9 @@ defmodule Bloomy.BitArray do
     |> Enum.map(&(&1 == 1))
   end
 
-  def get(%__MODULE__{bits: bits}, %Nx.Tensor{} = indices) do
+  def get(%__MODULE__{bits: bits, backend: backend}, %Nx.Tensor{} = indices) do
+    # Ensure indices are on the same backend as bits
+    indices = Nx.backend_transfer(indices, backend)
     values = get_bits_at_indices(bits, indices)
 
     values
@@ -161,8 +167,11 @@ defmodule Bloomy.BitArray do
       iex> Bloomy.BitArray.all_set?(ba, [10, 20, 40])
       false
   """
-  def all_set?(%__MODULE__{bits: bits, size: size}, indices) do
+  def all_set?(%__MODULE__{bits: bits, size: size, backend: backend}, indices) do
     indices_tensor = normalize_indices(indices, size)
+    # Ensure indices are on the same backend as bits
+    indices_tensor = Nx.backend_transfer(indices_tensor, backend)
+
     check_all_bits_set(bits, indices_tensor)
     |> Nx.to_number()
     |> then(&(&1 == 1))

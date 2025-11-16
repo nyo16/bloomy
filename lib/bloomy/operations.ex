@@ -159,10 +159,7 @@ defmodule Bloomy.Operations do
   def jaccard_similarity(%Standard{} = f1, %Standard{} = f2) do
     case compatible?(f1, f2) do
       :ok ->
-        # Count bits in each filter and in union/intersection
-        bits1 = Bloomy.BitArray.count(f1.bit_array)
-        bits2 = Bloomy.BitArray.count(f2.bit_array)
-
+        # Count bits in union/intersection
         union_bits = f1 |> Standard.union(f2) |> then(&Bloomy.BitArray.count(&1.bit_array))
 
         intersect_bits =
@@ -305,8 +302,6 @@ defmodule Bloomy.Operations do
   end
 
   # Private helper functions
-
-  defp check_compatibility([]), do: :ok
 
   defp check_compatibility([first | rest]) do
     type = filter_type(first)

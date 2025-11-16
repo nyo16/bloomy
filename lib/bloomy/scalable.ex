@@ -38,7 +38,7 @@ defmodule Bloomy.Scalable do
 
   @behaviour Bloomy.Behaviour
 
-  alias Bloomy.{Standard, Params}
+  alias Bloomy.Standard
 
   @type t :: %__MODULE__{
           slices: [Standard.t()],
